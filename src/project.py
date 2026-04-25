@@ -47,7 +47,7 @@ def main():
 	main_menu = True
 	score = 0
 	
-    
+
 	#tile map layout for level
 	world_data = [
 		[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
@@ -71,3 +71,22 @@ def main():
 		[1, 0, 0, 0, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
 		[1, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 	]
+	
+
+    # create groups
+	enemy_group = pygame.sprite.Group()
+	platform_group = pygame.sprite.Group()
+	lava_group = pygame.sprite.Group()
+	coin_group = pygame.sprite.Group()
+	exit_group = pygame.sprite.Group()
+ 
+	# create player and world
+	player = Player(100, screen_height - 130)
+	world = World(world_data, enemy_group, platform_group, lava_group, coin_group, exit_group)
+ 
+	# create buttons
+	restart_img = pygame.transform.scale(restart_img, (200, 80))
+	restart_button = Button(screen_width // 2 - 100, screen_height // 2 + 100 - 40, restart_img)
+	start_button = Button(screen_width // 2 - 350, screen_height // 2, start_img)
+	exit_button = Button(screen_width // 2 + 150, screen_height // 2, exit_img)
+	win_restart_button = Button(screen_width // 2 - 100, screen_height // 2 + 80, restart_img)
