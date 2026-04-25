@@ -340,6 +340,54 @@ class Player():
 		self.in_air = True
 
 
+class World():
+	def __init__(self, data, enemy_group, platform_group, lava_group, coin_group, exit_group):
+		self.tile_list = []
+		dirt_img = pygame.image.load('images/dirt.png')
+		grass_img = pygame.image.load('images/grass.png')
+ 
+		row_count = 0
+		for row in data:
+			col_count = 0
+			for tile in row:
+				if tile == 1: #dirt tile
+					img = pygame.transform.scale(dirt_img, (tile_size, tile_size))
+					img_rect = img.get_rect()
+					img_rect.x = col_count * tile_size
+					img_rect.y = row_count * tile_size
+					tile_tuple = (img, img_rect)
+					self.tile_list.append(tile_tuple)
+				if tile == 2: #grass tile
+					img = pygame.transform.scale(grass_img, (tile_size, tile_size))
+					img_rect = img.get_rect()
+					img_rect.x = col_count * tile_size
+					img_rect.y = row_count * tile_size
+					tile_tuple = (img, img_rect)
+					self.tile_list.append(tile_tuple)
+				if tile == 3:  #enemy spawn point
+					enemy = Enemies(col_count * tile_size, row_count * tile_size + 15)
+					enemy_group.add(enemy)
+				if tile == 4: #horizontal moving platform
+					platform = Platform(col_count * tile_size, row_count * tile_size, 1, 0)
+					platform_group.add(platform)
+				if tile == 5: #vertical moving platform
+					platform = Platform(col_count * tile_size, row_count * tile_size, 0, 1)
+					platform_group.add(platform)
+				if tile == 6: #lava
+					lava = Lava(col_count * tile_size, row_count * tile_size + (tile_size // 2))
+					lava_group.add(lava)
+				if tile == 7: #Coin
+					coin = Coin(col_count * tile_size + (tile_size // 2), row_count * tile_size + (tile_size // 2))
+					coin_group.add(coin)
+				if tile == 8: #exit
+					exit_obj = Exit(col_count * tile_size, row_count * tile_size - (tile_size // 2))
+					exit_group.add(exit_obj)
+				col_count += 1
+			row_count += 1
+ 
+	def draw(self):
+		for tile in self.tile_list:
+			screen.blit(tile[0], tile[1])
 
 
 
