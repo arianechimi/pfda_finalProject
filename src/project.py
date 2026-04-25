@@ -431,6 +431,29 @@ class Platform(pygame.sprite.Sprite):
 			self.move_counter *= -1
 
 
+class Lava(pygame.sprite.Sprite):
+	def __init__(self, x, y):
+		pygame.sprite.Sprite.__init__(self)
+		img = pygame.image.load('images/lava.png')
+		self.image = pygame.transform.scale(img, (tile_size, tile_size // 2))
+		self.rect = self.image.get_rect(topleft=(x, y))
+ 
+ 
+class Coin(pygame.sprite.Sprite):
+	def __init__(self, x, y):
+		pygame.sprite.Sprite.__init__(self)
+		img = pygame.image.load('images/coin.png')
+		self.image = pygame.transform.scale(img, (tile_size // 2, tile_size // 2))
+		self.rect = self.image.get_rect()
+		self.rect.center = (x, y)
+ 
+ 
+class Exit(pygame.sprite.Sprite):
+	def __init__(self, x, y):
+		pygame.sprite.Sprite.__init__(self)
+		img = pygame.image.load('images/exit.png')
+		self.image = pygame.transform.scale(img, (tile_size, int(tile_size // 0.65)))
+		self.rect = self.image.get_rect(topleft=(x, y))
 
 if __name__ == '__main__':
 	main()
