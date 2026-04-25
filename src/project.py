@@ -90,3 +90,57 @@ def main():
 	start_button = Button(screen_width // 2 - 350, screen_height // 2, start_img)
 	exit_button = Button(screen_width // 2 + 150, screen_height // 2, exit_img)
 	win_restart_button = Button(screen_width // 2 - 100, screen_height // 2 + 80, restart_img)
+	
+
+    # game loop
+	run = True
+	while run:
+		clock.tick(fps)
+		screen.blit(bg_img, (0, 0))
+ 
+		if main_menu:
+			if exit_button.draw():
+				run = False
+			if start_button.draw():
+				main_menu = False
+		else:
+			world.draw()
+
+			if game_over == 0:
+				enemy_group.update()
+				platform_group.update()
+				game_over = player.update(game_over, world, enemy_group, platform_group, lava_group, coin_group, exit_group)
+				if pygame.sprite.spritecollide(player, coin_group, True):
+					score += 1
+					coin_fx.play()
+				draw_text('X ' + str(score), font_score, white, 60, 60)
+ 
+			enemy_group.draw(screen)
+			platform_group.draw(screen)
+			lava_group.draw(screen)
+			coin_group.draw(screen)
+			exit_group.draw(screen)
+ 
+			if game_over == -1:
+				player.update(game_over, world, enemy_group, platform_group, lava_group, coin_group, exit_group)
+				if restart_button.draw():
+					world = reset_level(player, enemy_group, platform_group, lava_group, coin_group, exit_group)
+					game_over = 0
+					score = 0
+ 
+			if game_over == 1:
+				text = win_font.render("YOU WON!", True, (255, 255, 255))
+				screen.blit(text, (screen_width // 2 - text.get_width() // 2,
+								screen_height // 2 - text.get_height() // 2))
+				if win_restart_button.draw():
+					world = reset_level(player, enemy_group, platform_group, lava_group, coin_group, exit_group)
+					game_over = 0
+					score = 0
+ 
+		for event in pygame.event.get():
+			if event.type == pygame.QUIT:
+				run = False
+ 
+		pygame.display.update()
+ 
+	pygame.quit()
