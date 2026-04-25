@@ -14,3 +14,30 @@ screen_height = 1000
  
 screen = pygame.display.set_mode((screen_width, screen_height))
 pygame.display.set_caption('Get out')
+
+# define font and color
+font = pygame.font.SysFont('PressStart2P-Regular', 70)
+font_score = pygame.font.SysFont('PressStart2P-Regular', 30)
+win_font = pygame.font.Font("PressStart2P-Regular.ttf", 32)
+white = (255, 255, 255)
+ 
+# game variables
+tile_size = 50
+ 
+# Load Images
+bg_img = pygame.image.load('images/bg.png')
+restart_img = pygame.image.load('images/restart_btn.png')
+start_img = pygame.image.load('images/start_btn.png')
+exit_img = pygame.image.load('images/exit_btn.png')
+ 
+# load sounds
+pygame.mixer.music.load('sounds/game_music.wav')
+pygame.mixer.music.play(-1, 0.0, 5000)
+pygame.mixer.music.set_volume(0.1)
+coin_fx = pygame.mixer.Sound('sounds/coin.wav')
+coin_fx.set_volume(0.5)
+jump_fx = pygame.mixer.Sound('sounds/jump.wav')
+jump_fx.set_volume(0.5)
+game_over_fx = pygame.mixer.Sound('sounds/game_over.wav')
+game_over_fx.set_volume(0.5)
+
