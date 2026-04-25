@@ -144,3 +144,16 @@ def main():
 		pygame.display.update()
  
 	pygame.quit()
+	
+def draw_text(text, font, text_col, x, y):
+	img = font.render(text, True, text_col)
+	screen.blit(img, (x, y))
+ 
+ 
+def reset_level(player, enemy_group, platform_group, lava_group, coin_group, exit_group):
+	player.reset(100, screen_height - 130)
+	enemy_group.empty()
+	platform_group.empty()
+	lava_group.empty()
+	coin_group.empty()
+	exit_group.empty()
