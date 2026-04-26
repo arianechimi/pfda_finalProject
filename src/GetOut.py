@@ -33,13 +33,13 @@ exit_img = pygame.image.load('images/exit_btn.png')
 # load sounds
 pygame.mixer.music.load('sounds/game_music.wav')
 pygame.mixer.music.play(-1, 0.0, 5000)
-pygame.mixer.music.set_volume(0.1)
+pygame.mixer.music.set_volume(0.03)
 coin_fx = pygame.mixer.Sound('sounds/coin.wav')
-coin_fx.set_volume(0.5)
+coin_fx.set_volume(0.04)
 jump_fx = pygame.mixer.Sound('sounds/jump.wav')
-jump_fx.set_volume(0.5)
+jump_fx.set_volume(0.04)
 game_over_fx = pygame.mixer.Sound('sounds/game_over.wav')
-game_over_fx.set_volume(0.5)
+game_over_fx.set_volume(0.04)
 
 
 def main():
@@ -48,7 +48,7 @@ def main():
 	score = 0
 	
 
-	#tile map layout for level
+	#tile map for the level
 	world_data = [
 		[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
 		[1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
@@ -73,7 +73,7 @@ def main():
 	]
 	
 
-    # create groups
+    # groups
 	enemy_group = pygame.sprite.Group()
 	platform_group = pygame.sprite.Group()
 	lava_group = pygame.sprite.Group()
@@ -84,7 +84,7 @@ def main():
 	player = Player(100, screen_height - 130)
 	world = World(world_data, enemy_group, platform_group, lava_group, coin_group, exit_group)
  
-	# create buttons
+	# create all necessary buttons
 	restart_img_scaled = pygame.transform.scale(restart_img, (200, 80))
 	restart_button = Button(screen_width // 2 - 100, screen_height // 2 + 100 - 40, restart_img_scaled)
 	start_button = Button(screen_width // 2 - 350, screen_height // 2, start_img)
@@ -121,7 +121,7 @@ def main():
 			coin_group.draw(screen)
 			exit_group.draw(screen)
  
-			if game_over == -1:
+			if game_over == -1: #Player is dead
 				player.update(game_over, world, enemy_group, platform_group, lava_group, coin_group, exit_group)
 				if restart_button.draw():
 					world = reset_level(player, enemy_group, platform_group, lava_group, coin_group, exit_group)
@@ -195,7 +195,7 @@ class Button():
 	def draw(self):
 		action = False
 		pos = pygame.mouse.get_pos() #Get mouse position
-		#check mouseover and clicked conditions
+		#check mouse position on the screen
 		if self.rect.collidepoint(pos):
 			if pygame.mouse.get_pressed()[0] == 1 and self.clicked == False:
 				action = True
@@ -364,7 +364,7 @@ class World():
 					img_rect.y = row_count * tile_size
 					tile_tuple = (img, img_rect)
 					self.tile_list.append(tile_tuple)
-				if tile == 3:  #enemy spawn point
+				if tile == 3:  #enemy
 					enemy = Enemies(col_count * tile_size, row_count * tile_size + 15)
 					enemy_group.add(enemy)
 				if tile == 4: #horizontal moving platform
