@@ -8,7 +8,7 @@ GitHub Repo: https://github.com/arianechimi/pfda_finalProject
 
 ## Description
 
-This is a platformer game built using python where a player is stuck in somewhere and has to get out. The player walk and jump across platforms, avoid enemies and lava while collecting coins on their way to the top where the exit is located.
+This is a platformer game built using python where a player is stuck somewhere and has to get out. The player walk and jump across platforms, avoid enemies and lava while collecting coins on their way to the top where the exit is located.
 
 The games has many features like a player that moves around and jumps, platforms that move up and down but also left to right, enemy obstacles, lava, and coin collection with a score counter. There is a start menu. "Start" will start the game and "Exit" will close the game. The game also has music and sounds effects to add to the overall experience.
 
@@ -19,6 +19,8 @@ GetOut.py which contain my main game file with my game logic, classes, and game 
 The images folder has all my image assets like my player, tiles, enemies, lava, coin, and UI buttons.
 
 The sounds folder has all my audio asssets like background music, coin, jump, and game over sound effects.
+
+PressStart2P_regular.ttf is my font file for the game.
 
 ## Design
 
